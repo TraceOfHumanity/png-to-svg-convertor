@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { trace } from "potrace";
+import { trace } from "potrace"; // Потрібно встановити бібліотеку: npm install potrace
 
 function App() {
   const [image, setImage] = useState<string | null>(null);
@@ -25,13 +25,31 @@ function App() {
     setSvg(svgString);
   };
 
+  const downloadSvg = () => {
+    if (!svg) return;
+    const blob = new Blob([svg], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "converted-image.svg";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div>
       <h1>PNG to SVG Converter</h1>
       <input type="file" accept="image/png" onChange={handleImageUpload} />
       {image && <img src={image} alt="Uploaded" width={200} />}
       <button onClick={convertToSvg} disabled={!image}>Convert to SVG</button>
-      {svg && <div dangerouslySetInnerHTML={{ __html: svg }} />}
+      {svg && (
+        <div>
+          <div dangerouslySetInnerHTML={{ __html: svg }} />
+          <button onClick={downloadSvg}>Download SVG</button>
+        </div>
+      )}
     </div>
   );
 }
