@@ -2,36 +2,46 @@ import { useState } from "react";
 import { trace } from "potrace"; // Потрібно встановити бібліотеку: npm install potrace
 
 function App() {
-  const [image, setImage] = useState<string | null>(null);
-  const [svg, setSvg] = useState<string | null>(null);
+  const [images, setImages] = useState<{ name: string; data: string }[]>([]);
+  const [svgs, setSvgs] = useState<{ name: string; data: string }[]>([]);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => setImage(e.target?.result as string);
-      reader.readAsDataURL(file);
+    const files = event.target.files;
+    if (files) {
+      const newImages: { name: string; data: string }[] = [];
+      Array.from(files).forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          newImages.push({ name: file.name, data: e.target?.result as string });
+          if (newImages.length === files.length) {
+            setImages((prevImages) => [...prevImages, ...newImages]);
+          }
+        };
+        reader.readAsDataURL(file);
+      });
     }
   };
 
   const convertToSvg = async () => {
-    if (!image) return;
-    const svgString = await new Promise<string>((resolve, reject) => {
-      trace(image, (err, svg) => {
-        if (err) reject(err);
-        else resolve(svg);
+    const newSvgs: { name: string; data: string }[] = [];
+    for (const img of images) {
+      const svgString = await new Promise<string>((resolve, reject) => {
+        trace(img.data, (err, svg) => {
+          if (err) reject(err);
+          else resolve(svg);
+        });
       });
-    });
-    setSvg(svgString);
+      newSvgs.push({ name: img.name.replace(/\.png$/, ".svg"), data: svgString });
+    }
+    setSvgs(newSvgs);
   };
 
-  const downloadSvg = () => {
-    if (!svg) return;
-    const blob = new Blob([svg], { type: "image/svg+xml" });
+  const downloadSvg = (name: string, data: string) => {
+    const blob = new Blob([data], { type: "image/svg+xml" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "converted-image.svg";
+    a.download = name;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -41,15 +51,21 @@ function App() {
   return (
     <div>
       <h1>PNG to SVG Converter</h1>
-      <input type="file" accept="image/png" onChange={handleImageUpload} />
-      {image && <img src={image} alt="Uploaded" width={200} />}
-      <button onClick={convertToSvg} disabled={!image}>Convert to SVG</button>
-      {svg && (
-        <div>
-          <div dangerouslySetInnerHTML={{ __html: svg }} />
-          <button onClick={downloadSvg}>Download SVG</button>
+      <input type="file" accept="image/png" multiple onChange={handleImageUpload} />
+      {images.map((img, index) => (
+        <div key={index}>
+          <img src={img.data} alt={img.name} width={200} />
+          <p>{img.name}</p>
         </div>
-      )}
+      ))}
+      <button onClick={convertToSvg} disabled={images.length === 0}>Convert to SVG</button>
+      {svgs.map((svg, index) => (
+        <div key={index}>
+          <div dangerouslySetInnerHTML={{ __html: svg.data }} />
+          <p>{svg.name}</p>
+          <button onClick={() => downloadSvg(svg.name, svg.data)}>Download SVG</button>
+        </div>
+      ))}
     </div>
   );
 }
