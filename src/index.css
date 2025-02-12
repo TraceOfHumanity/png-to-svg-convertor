@@ -33,3 +33,10 @@ body {
 button, input[type="file"] {
   cursor: pointer;
 }
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+  display: none;
+  
+}
