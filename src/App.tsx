@@ -15,7 +15,7 @@ function App() {
       <InputFiles handleImageUpload={handleImageUpload} />
       <ActionButtons images={images} svgs={svgs} convertToSvg={convertToSvg} downloadAllSvgs={downloadAllSvgs} />
       <div className="grid grid-cols-2 gap-4">
-        <PngImagesList images={images} />
+        {images.length > 0 && <PngImagesList images={images} />}
         {svgs.length > 0 && <SvgImagesList svgs={svgs} />}
       </div>
       {<Loader isLoading={isLoading} />}
