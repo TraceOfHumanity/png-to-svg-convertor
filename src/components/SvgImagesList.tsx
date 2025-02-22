@@ -1,18 +1,23 @@
-
 interface SvgImagesListProps {
-  svgs: { name: string; data: string }[];
+  svgs: {name: string; data: string}[];
 }
 
-export const SvgImagesList = ({ svgs }: SvgImagesListProps) => {
+export const SvgImagesList = ({svgs}: SvgImagesListProps) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3 relative after:content-[''] after:absolute after:w-px after:bg-black after:h-full after:-left-2 after:top-0 after:opacity-50 h-fit">
-      <h2 className="text-2xl font-bold col-span-full text-center">SVGs</h2>
+    <div className="relative grid h-fit grid-cols-1 gap-4 after:absolute after:top-0 after:-left-2 after:h-full after:w-px after:bg-black after:opacity-50 after:content-[''] md:grid-cols-2 lg:grid-cols-3">
+      <h2 className="col-span-full text-center text-2xl font-bold">SVGs</h2>
       {svgs.map((svg, index) => (
-        <div key={index} className="flex flex-col gap-2 relative group border border-black rounded-md p-1 backdrop-blur">
-          <div className="w-full h-full [&_svg]:w-full [&_svg]:h-full" dangerouslySetInnerHTML={{ __html: svg.data }} />
+        <div
+          key={index}
+          className="group relative flex flex-col gap-2 rounded-md border border-black p-1 backdrop-blur"
+        >
+          <div
+            className="h-full w-full [&_svg]:h-full [&_svg]:w-full"
+            dangerouslySetInnerHTML={{__html: svg.data}}
+          />
           <p>{svg.name}</p>
         </div>
       ))}
     </div>
-  )
-}
+  );
+};

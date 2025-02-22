@@ -9,14 +9,18 @@
 }
 
 body {
-  background: linear-gradient(to bottom right, var(--bodyBgFrom), var(--bodyBgTo));
+  background: linear-gradient(
+    to bottom right,
+    var(--bodyBgFrom),
+    var(--bodyBgTo)
+  );
   overflow: hidden;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
   position: relative;
-  
+
   &::before {
     content: "";
     position: absolute;
@@ -30,7 +34,8 @@ body {
   }
 }
 
-button, input[type="file"] {
+button,
+input[type="file"] {
   cursor: pointer;
 }
 
@@ -38,5 +43,4 @@ button, input[type="file"] {
   width: 0;
   background: transparent;
   display: none;
-  
 }
