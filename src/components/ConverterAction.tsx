@@ -1,15 +1,9 @@
-interface ActionButtonsProps {
-  images: {name: string; data: string}[];
-  svgs: {name: string; data: string}[];
-  convertToSvg: () => void;
-  downloadAllSvgs: () => void;
-}
-export const Actions = ({
-  images,
-  svgs,
-  convertToSvg,
-  downloadAllSvgs,
-}: ActionButtonsProps) => {
+import {useContext} from 'react';
+import {ConverterContext} from '../context/ConverterContext';
+
+export const Actions = () => {
+  const {images, svgs, convertToSvg, downloadAllSvgs} =
+    useContext(ConverterContext);
   return (
     <div className='ml-auto flex w-fit items-center gap-2'>
       {images.length > 0 && (

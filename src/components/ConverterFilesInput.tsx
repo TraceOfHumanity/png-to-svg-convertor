@@ -1,10 +1,9 @@
+import {useContext} from 'react';
 import {FaUpload} from 'react-icons/fa';
+import {ConverterContext} from '../context/ConverterContext';
 
-interface FilesInputProps {
-  handleImageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-export const FilesInput = ({handleImageUpload}: FilesInputProps) => {
+export const FilesInput = () => {
+  const {handleImageUpload} = useContext(ConverterContext);
   return (
     <div className='border-mainText relative min-h-40 w-full rounded-md border-2 border-dashed backdrop-blur-3xl duration-200 hover:bg-slate-950/5'>
       <input

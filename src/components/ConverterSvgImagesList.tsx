@@ -1,8 +1,10 @@
-interface SvgImagesListProps {
-  svgs: {name: string; data: string}[];
-}
+import {useContext} from 'react';
+import {ConverterContext} from '../context/ConverterContext';
 
-export const SvgImagesList = ({svgs}: SvgImagesListProps) => {
+export const SvgImagesList = () => {
+  const {svgs} = useContext(ConverterContext);
+
+  if (svgs.length === 0) return null;
   return (
     <div className="relative grid h-fit grid-cols-1 gap-4 after:absolute after:top-0 after:-left-2 after:h-full after:w-px after:bg-black after:opacity-50 after:content-[''] md:grid-cols-2 lg:grid-cols-3">
       <h2 className='col-span-full text-center text-2xl font-bold'>SVGs</h2>

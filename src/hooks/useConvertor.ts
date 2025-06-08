@@ -1,15 +1,16 @@
 import {useState} from 'react';
 import {trace} from 'potrace';
 import JSZip from 'jszip';
+import {ConverterContextType} from '../types/ConverterTypes';
 
 export const useConvertor = () => {
-  const [images, setImages] = useState<{name: string; data: string}[]>([]);
-  const [svgs, setSvgs] = useState<{name: string; data: string}[]>([]);
+  const [images, setImages] = useState<ConverterContextType['images']>([]);
+  const [svgs, setSvgs] = useState<ConverterContextType['svgs']>([]);
   const [isLoading, setIsLoading] = useState(false);
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
-      const newImages: {name: string; data: string}[] = [];
+      const newImages: ConverterContextType['images'] = [];
       Array.from(files).forEach((file) => {
         const reader = new FileReader();
         reader.onload = (e) => {

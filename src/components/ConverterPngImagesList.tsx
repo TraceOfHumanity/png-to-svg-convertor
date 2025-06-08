@@ -1,8 +1,14 @@
-interface PngImagesListProps {
-  images: {name: string; data: string}[];
-}
+// interface PngImagesListProps {
+//   images: {name: string; data: string}[];
+// }
 
-export const PngImagesList = ({images}: PngImagesListProps) => {
+import {useContext} from 'react';
+import {ConverterContext} from '../context/ConverterContext';
+
+export const PngImagesList = () => {
+  const {images} = useContext(ConverterContext);
+
+  if (images.length === 0) return null;
   return (
     <div className='relative grid h-fit grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
       <h2 className='col-span-full text-center text-2xl font-bold'>PNGs</h2>
