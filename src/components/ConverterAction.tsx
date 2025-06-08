@@ -4,7 +4,7 @@ interface ActionButtonsProps {
   convertToSvg: () => void;
   downloadAllSvgs: () => void;
 }
-export const ActionButtons = ({
+export const Actions = ({
   images,
   svgs,
   convertToSvg,
