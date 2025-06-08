@@ -11,10 +11,10 @@ export const Actions = ({
   downloadAllSvgs,
 }: ActionButtonsProps) => {
   return (
-    <div className="ml-auto flex w-fit items-center gap-2">
+    <div className='ml-auto flex w-fit items-center gap-2'>
       {images.length > 0 && (
         <button
-          className="ml-auto flex w-fit items-center gap-2 rounded bg-black p-1 text-white"
+          className='ml-auto flex w-fit items-center gap-2 rounded bg-black p-1 text-white'
           onClick={convertToSvg}
           disabled={images.length === 0}
         >
@@ -23,7 +23,7 @@ export const Actions = ({
       )}
       {svgs.length > 0 && (
         <button
-          className="ml-auto flex w-fit items-center gap-2 rounded bg-black p-1 text-white"
+          className='ml-auto flex w-fit items-center gap-2 rounded bg-black p-1 text-white'
           onClick={downloadAllSvgs}
         >
           Download All SVGs

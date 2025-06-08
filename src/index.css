@@ -1,11 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Edu+SA+Beginner:regular,500,600,700);
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --bodyBgFrom: #c2f5e0;
   --bodyBgTo: #f7aeb5;
 
-  --font-eduBeginner: "Edu SA Beginner", cursive;
+  --font-eduBeginner: 'Edu SA Beginner', cursive;
 }
 
 body {
@@ -22,20 +22,20 @@ body {
   position: relative;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("../public/bgPattern.svg");
+    background-image: url('../public/bgPattern.svg');
     background-position: center;
     z-index: -1;
   }
 }
 
 button,
-input[type="file"] {
+input[type='file'] {
   cursor: pointer;
 }
 

@@ -1,6 +1,6 @@
-import {useState} from "react";
-import {trace} from "potrace";
-import JSZip from "jszip";
+import {useState} from 'react';
+import {trace} from 'potrace';
+import JSZip from 'jszip';
 
 export const useConvertor = () => {
   const [images, setImages] = useState<{name: string; data: string}[]>([]);
@@ -34,7 +34,7 @@ export const useConvertor = () => {
         });
       });
       newSvgs.push({
-        name: img.name.replace(/\.png$/, ".svg"),
+        name: img.name.replace(/\.png$/, '.svg'),
         data: svgString,
       });
     }
@@ -47,11 +47,11 @@ export const useConvertor = () => {
     svgs.forEach(({name, data}) => {
       zip.file(name, data);
     });
-    zip.generateAsync({type: "blob"}).then((content) => {
+    zip.generateAsync({type: 'blob'}).then((content) => {
       const url = URL.createObjectURL(content);
-      const a = document.createElement("a");
+      const a = document.createElement('a');
       a.href = url;
-      a.download = "converted_svgs.zip";
+      a.download = 'converted_svgs.zip';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
