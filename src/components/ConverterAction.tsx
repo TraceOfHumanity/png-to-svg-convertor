@@ -9,7 +9,7 @@ export const Actions = () => {
 
   return (
     <div className='ml-auto flex w-fit items-center gap-2'>
-      {images.length > 0 && (
+      {images.length > 0 && svgs.length === 0 && (
         <button
           className='ml-auto flex w-fit items-center gap-2 rounded bg-black p-1 text-white'
           onClick={convertToSvg}
