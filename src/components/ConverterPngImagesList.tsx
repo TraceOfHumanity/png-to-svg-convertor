@@ -4,9 +4,10 @@
 
 import {useContext} from 'react';
 import {ConverterContext} from '../context/ConverterContext';
+import {ConverterContextType} from '../types/ConverterTypes';
 
 export const PngImagesList = () => {
-  const {images} = useContext(ConverterContext);
+  const {images} = useContext(ConverterContext) as ConverterContextType;
 
   if (images.length === 0) return null;
   return (
