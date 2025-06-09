@@ -2,36 +2,10 @@
 @import 'tailwindcss';
 
 @theme {
-  --bodyBgFrom: #c2f5e0;
-  --bodyBgTo: #f7aeb5;
+  --color-bodyBgFrom: #c2f5e0;
+  --color-bodyBgTo: #f7aeb5;
 
   --font-eduBeginner: 'Edu SA Beginner', cursive;
-}
-
-body {
-  background: linear-gradient(
-    to bottom right,
-    var(--bodyBgFrom),
-    var(--bodyBgTo)
-  );
-  overflow: hidden;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../public/bgPattern.svg');
-    background-position: center;
-    z-index: -1;
-  }
 }
 
 button,
