@@ -1,11 +1,10 @@
 import { renderHook, act } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { useConvertor } from '../hooks/useConvertor'
+import { createMockFileReader, createMockEvent, createMockFile } from './test-utils'
 
-// Моки для зовнішніх залежностей
 vi.mock('potrace', () => ({
   trace: vi.fn((data, callback) => {
-    // Симулюємо успішну конвертацію
     setTimeout(() => callback(null, '<svg>test</svg>'), 10)
   })
 }))
@@ -33,28 +32,16 @@ describe('useConvertor', () => {
   it('повинен обробляти завантаження зображень', async () => {
     const { result } = renderHook(() => useConvertor())
 
-    const mockFile = new File(['test'], 'test.png', { type: 'image/png' })
-    const mockEvent = {
-      target: {
-        files: [mockFile]
-      }
-    } as React.ChangeEvent<HTMLInputElement>
-
-    // Мокуємо FileReader
-    const mockFileReader = {
-      readAsDataURL: vi.fn(),
-      onload: null as any,
-      result: 'data:image/png;base64,test'
-    }
-    global.FileReader = vi.fn(() => mockFileReader) as any
+    const mockFile = createMockFile('test.png')
+    const mockEvent = createMockEvent([mockFile])
+    const mockFileReader = createMockFileReader()
 
     await act(async () => {
       result.current.handleImageUpload(mockEvent)
     })
 
-    // Симулюємо завершення читання файлу
     await act(async () => {
-      mockFileReader.onload({ target: { result: 'data:image/png;base64,test' } })
+      mockFileReader.onload?.({ target: { result: 'data:image/png;base64,test' } } as unknown as ProgressEvent<FileReader>)
     })
 
     expect(result.current.images).toHaveLength(1)
@@ -64,13 +51,12 @@ describe('useConvertor', () => {
   it('повинен конвертувати зображення в SVG', async () => {
     const { result } = renderHook(() => useConvertor())
 
-    // Спочатку додаємо зображення
     const mockFile = new File(['test'], 'test.png', { type: 'image/png' })
     const mockEvent = {
       target: {
         files: [mockFile]
       }
-    } as React.ChangeEvent<HTMLInputElement>
+    } as unknown as React.ChangeEvent<HTMLInputElement>
 
     const mockFileReader = {
       readAsDataURL: vi.fn(),
@@ -84,7 +70,6 @@ describe('useConvertor', () => {
       mockFileReader.onload({ target: { result: 'data:image/png;base64,test' } })
     })
 
-    // Тепер конвертуємо
     await act(async () => {
       await result.current.convertToSvg()
     })
@@ -98,13 +83,12 @@ describe('useConvertor', () => {
   it('повинен встановлювати isLoading під час конвертації', async () => {
     const { result } = renderHook(() => useConvertor())
 
-    // Додаємо зображення
     const mockFile = new File(['test'], 'test.png', { type: 'image/png' })
     const mockEvent = {
       target: {
         files: [mockFile]
       }
-    } as React.ChangeEvent<HTMLInputElement>
+    } as unknown as React.ChangeEvent<HTMLInputElement>
 
     const mockFileReader = {
       readAsDataURL: vi.fn(),
@@ -118,20 +102,15 @@ describe('useConvertor', () => {
       mockFileReader.onload({ target: { result: 'data:image/png;base64,test' } })
     })
 
-    // Перевіряємо початковий стан
     expect(result.current.isLoading).toBe(false)
 
-    // Запускаємо конвертацію
     act(() => {
       result.current.convertToSvg()
     })
 
-    // Перевіряємо, що isLoading встановлюється в true
     expect(result.current.isLoading).toBe(true)
 
-    // Чекаємо завершення конвертації
     await act(async () => {
-      // Даємо час для завершення асинхронної операції
       await new Promise(resolve => setTimeout(resolve, 20))
     })
 
@@ -141,7 +120,6 @@ describe('useConvertor', () => {
   it('повинен завантажувати всі SVG файли', async () => {
     const { result } = renderHook(() => useConvertor())
 
-    // Мокуємо DOM API
     const mockAnchor = {
       href: '',
       download: '',
@@ -163,13 +141,12 @@ describe('useConvertor', () => {
       writable: true
     })
 
-    // Створюємо тестові SVG через конвертацію
     const mockFile = new File(['test'], 'test.png', { type: 'image/png' })
     const mockEvent = {
       target: {
         files: [mockFile]
       }
-    } as React.ChangeEvent<HTMLInputElement>
+    } as unknown as React.ChangeEvent<HTMLInputElement>
 
     const mockFileReader = {
       readAsDataURL: vi.fn(),

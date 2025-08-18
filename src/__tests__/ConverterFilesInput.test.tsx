@@ -65,7 +65,6 @@ describe('ConverterFilesInput', () => {
   it('повинен відображати іконку завантаження', () => {
     renderWithContext()
     
-    // Перевіряємо, що іконка присутня (FaUpload)
     const icon = document.querySelector('svg')
     expect(icon).toBeInTheDocument()
   })

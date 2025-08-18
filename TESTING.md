@@ -80,11 +80,9 @@ src/__tests__/
 ```typescript
 describe('ComponentName', () => {
   beforeEach(() => {
-    // Налаштування
   })
 
   it('повинен робити щось', () => {
-    // Тест
   })
 })
 ```
@@ -93,13 +91,11 @@ describe('ComponentName', () => {
 ```typescript
 import { renderWithContext, createMockFile } from './test-utils'
 
-// Замість звичайного render
 renderWithContext(<Component />, { contextValue: mockContext })
 ```
 
 ### 3. Мокування
 ```typescript
-// Мокування зовнішніх залежностей
 vi.mock('potrace', () => ({
   trace: vi.fn((data, callback) => callback(null, '<svg>test</svg>'))
 }))
@@ -109,7 +105,6 @@ vi.mock('potrace', () => ({
 ```typescript
 it('повинен обробляти асинхронну операцію', async () => {
   await act(async () => {
-    // Асинхронна операція
   })
   
   expect(result.current.isLoading).toBe(false)
@@ -120,7 +115,6 @@ it('повинен обробляти асинхронну операцію', as
 
 ### 1. Створення тесту для хука
 ```typescript
-// src/__tests__/newHook.test.ts
 import { renderHook, act } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import { useNewHook } from '../hooks/useNewHook'
@@ -135,7 +129,6 @@ describe('useNewHook', () => {
 
 ### 2. Створення тесту для компонента
 ```typescript
-// src/__tests__/NewComponent.test.tsx
 import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import { NewComponent } from '../components/NewComponent'
@@ -167,7 +160,6 @@ export default defineConfig({
 ```typescript
 import '@testing-library/jest-dom'
 
-// Глобальні моки
 global.ResizeObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
@@ -179,12 +171,10 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
 
 ### 1. Помилка "act() without await"
 ```typescript
-// ❌ Неправильно
 act(() => {
   result.current.asyncFunction()
 })
 
-// ✅ Правильно
 await act(async () => {
   await result.current.asyncFunction()
 })
@@ -192,7 +182,6 @@ await act(async () => {
 
 ### 2. Помилка "Cannot find module"
 ```typescript
-// Додайте мок на початку файлу
 vi.mock('../path/to/module', () => ({
   default: vi.fn(),
   namedExport: vi.fn(),
@@ -201,9 +190,8 @@ vi.mock('../path/to/module', () => ({
 
 ### 3. Помилка "Element not found"
 ```typescript
-// Використовуйте правильні селектори
-screen.getByRole('button') // замість getByText для кнопок
-screen.getByTestId('my-element') // для складних елементів
+screen.getByRole('button')
+screen.getByTestId('my-element')
 ```
 
 ## Корисні команди

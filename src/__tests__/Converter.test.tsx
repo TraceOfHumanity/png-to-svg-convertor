@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import { Converter } from '../components/Converter'
 
-// Мокуємо хук useConvertor
 vi.mock('../hooks/useConvertor', () => ({
   useConvertor: vi.fn(() => ({
     images: [],
@@ -33,7 +32,6 @@ describe('Converter', () => {
       </Converter>
     )
 
-    // Знаходимо контейнер за data-testid або перевіряємо структуру
     const testElement = screen.getByText('Test')
     const parentContainer = testElement.parentElement
     expect(parentContainer).toBeInTheDocument()

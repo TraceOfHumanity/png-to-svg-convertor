@@ -68,7 +68,6 @@ describe('MyComponent', () => {
     }
     
     renderWithContext(<MyComponent />, { contextValue: mockContext })
-    // тести...
   })
 })
 ```
