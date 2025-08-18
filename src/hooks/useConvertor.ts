@@ -7,6 +7,7 @@ export const useConvertor = (): ConverterContextType => {
   const [images, setImages] = useState<ConverterContextType['images']>([]);
   const [svgs, setSvgs] = useState<ConverterContextType['svgs']>([]);
   const [isLoading, setIsLoading] = useState(false);
+  
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
