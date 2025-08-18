@@ -1,14 +1,14 @@
-import {PngImagesList} from './ConverterPngImagesList';
-import {SvgImagesList} from './ConverterSvgImagesList';
+import {PngImageList} from './ConverterPngImageList';
+import {SvgImageList} from './ConverterSvgImageList';
 
 export const ConverterImages = () => {
   return (
     <div className='grid grid-cols-2 gap-4'>
-      <ConverterImages.PngImagesList />
-      <ConverterImages.SvgImagesList />
+      <ConverterImages.PngImageList />
+      <ConverterImages.SvgImageList />
     </div>
   );
 };
 
-ConverterImages.PngImagesList = PngImagesList;
-ConverterImages.SvgImagesList = SvgImagesList;
+ConverterImages.PngImageList = PngImageList;
+ConverterImages.SvgImageList = SvgImageList;

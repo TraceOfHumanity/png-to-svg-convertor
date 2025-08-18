@@ -3,7 +3,7 @@ import {trace} from 'potrace';
 import JSZip from 'jszip';
 import {ConverterContextType} from '../types/ConverterTypes';
 
-export const useConvertor = () => {
+export const useConvertor = (): ConverterContextType => {
   const [images, setImages] = useState<ConverterContextType['images']>([]);
   const [svgs, setSvgs] = useState<ConverterContextType['svgs']>([]);
   const [isLoading, setIsLoading] = useState(false);

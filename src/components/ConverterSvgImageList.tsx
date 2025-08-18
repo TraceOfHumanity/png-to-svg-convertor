@@ -2,7 +2,7 @@ import {useContext} from 'react';
 import {ConverterContext} from '../context/ConverterContext';
 import {ConverterContextType} from '../types/ConverterTypes';
 
-export const SvgImagesList = () => {
+export const SvgImageList = () => {
   const {svgs} = useContext(ConverterContext) as ConverterContextType;
 
   if (svgs.length === 0) return null;

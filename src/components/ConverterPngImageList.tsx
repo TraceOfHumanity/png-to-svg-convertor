@@ -1,12 +1,8 @@
-// interface PngImagesListProps {
-//   images: {name: string; data: string}[];
-// }
-
 import {useContext} from 'react';
 import {ConverterContext} from '../context/ConverterContext';
 import {ConverterContextType} from '../types/ConverterTypes';
 
-export const PngImagesList = () => {
+export const PngImageList = () => {
   const {images} = useContext(ConverterContext) as ConverterContextType;
 
   if (images.length === 0) return null;
@@ -18,7 +14,7 @@ export const PngImagesList = () => {
           key={index}
           className='group relative flex flex-col gap-2 rounded-md border border-black p-1 backdrop-blur'
         >
-          <img className='mx-auto' src={img.data} alt={img.name} width={200} />
+          <img className='mx-auto' src={img.data} alt={img.name} />
           <p>{img.name}</p>
         </div>
       ))}
