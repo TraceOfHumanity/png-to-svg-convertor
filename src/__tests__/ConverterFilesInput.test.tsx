@@ -27,13 +27,13 @@ describe('ConverterFilesInput', () => {
     vi.clearAllMocks()
   })
 
-  it('повинен відображати правильний текст', () => {
+  it('should display correct text', () => {
     renderWithContext()
     
     expect(screen.getByText('Drag and drop or click to select images')).toBeInTheDocument()
   })
 
-  it('повинен мати input з правильними атрибутами', () => {
+  it('should have input with correct attributes', () => {
     renderWithContext()
     
     const fileInput = screen.getByDisplayValue('')
@@ -43,7 +43,7 @@ describe('ConverterFilesInput', () => {
     expect(fileInput).toHaveAttribute('multiple')
   })
 
-  it('повинен викликати handleImageUpload при зміні файлу', () => {
+  it('should call handleImageUpload when file changes', () => {
     renderWithContext()
     
     const fileInput = screen.getByDisplayValue('')
@@ -55,14 +55,14 @@ describe('ConverterFilesInput', () => {
     expect(mockHandleImageUpload).toHaveBeenCalledTimes(1)
   })
 
-  it('повинен мати правильні CSS класи', () => {
+  it('should have correct CSS classes', () => {
     renderWithContext()
     
     const container = screen.getByText('Drag and drop or click to select images').parentElement?.parentElement
     expect(container).toHaveClass('border-mainText', 'relative', 'min-h-40', 'w-full')
   })
 
-  it('повинен відображати іконку завантаження', () => {
+  it('should display upload icon', () => {
     renderWithContext()
     
     const icon = document.querySelector('svg')

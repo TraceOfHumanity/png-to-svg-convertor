@@ -1,61 +1,61 @@
-# Тести для PNG to SVG Converter
+# Tests for PNG to SVG Converter
 
-Ця папка містить тести для проекту PNG to SVG Converter, написані з використанням Vitest та React Testing Library.
+This folder contains tests for the PNG to SVG Converter project, written using Vitest and React Testing Library.
 
-## Структура тестів
+## Test structure
 
 ```
 src/__tests__/
-├── setup.ts                    # Налаштування тестового середовища
-├── test-utils.tsx             # Утиліти для тестування
-├── useConvertor.test.ts       # Тести для хука useConvertor
-├── Converter.test.tsx         # Тести для компонента Converter
-├── ConverterTitle.test.tsx    # Тести для компонента ConverterTitle
-├── ConverterFilesInput.test.tsx # Тести для компонента ConverterFilesInput
-└── README.md                  # Ця документація
+├── setup.ts                    # Test environment setup
+├── test-utils.tsx             # Test utilities
+├── useConvertor.test.ts       # Tests for useConvertor hook
+├── Converter.test.tsx         # Tests for Converter component
+├── ConverterTitle.test.tsx    # Tests for ConverterTitle component
+├── ConverterFilesInput.test.tsx # Tests for ConverterFilesInput component
+└── README.md                  # This documentation
 ```
 
-## Запуск тестів
+## Run tests
 
 ```bash
-# Запуск тестів в режимі watch
+# Run tests in watch mode
 npm test
 
-# Запуск тестів один раз
+# Run tests once
 npm run test:run
 
-# Запуск тестів з UI
-npm run test:ui
-
-# Запуск тестів з покриттям
+# Run tests with coverage
 npm run test:coverage
+
+# Run tests with UI
+npm run test:ui
 ```
 
-## Типи тестів
+## Types of tests
 
-### 1. Тести хуків (useConvertor.test.ts)
-- Тестування початкового стану
-- Тестування завантаження зображень
-- Тестування конвертації в SVG
-- Тестування стану завантаження
-- Тестування завантаження файлів
+### 1. Hook tests (useConvertor.test.ts)
+- Testing initial state
+- Testing image loading
+- Testing conversion to SVG
+- Testing loading state
+- Testing file loading
 
-### 2. Тести компонентів
-- **Converter.test.tsx**: Тестування основного компонента-контейнера
-- **ConverterTitle.test.tsx**: Тестування заголовка
-- **ConverterFilesInput.test.tsx**: Тестування поля введення файлів
+### 2. Component tests
+- **Converter.test.tsx**: Testing the main container component
+- **ConverterTitle.test.tsx**: Testing the title
+- **ConverterFilesInput.test.tsx**: Testing the file input field
 
-## Утиліти для тестування
+## Test utilities
 
 ### test-utils.tsx
-Містить корисні функції для тестування:
+Contains useful functions for testing:
 
-- `renderWithContext()` - рендер з провайдером контексту
-- `createMockContext()` - створення мок контексту
-- `createMockFile()` - створення мок файлу
-- `createMockEvent()` - створення мок події
+- `renderWithContext()` - render with a context provider
+- `createMockContext()` - create a mock context
+- `createMockFile()` - create a mock file
+- `createMockEvent()` - create a mock event
 
-### Приклад використання
+### Example usage
 
 ```typescript
 import { renderWithContext, createMockFile } from './test-utils'
@@ -72,30 +72,30 @@ describe('MyComponent', () => {
 })
 ```
 
-## Моки
+## Mocks
 
-### Зовнішні залежності
-- `potrace` - мокується для симуляції конвертації
-- `jszip` - мокується для створення ZIP файлів
-- `FileReader` - мокується для читання файлів
+### External dependencies
+- `potrace` - mocked for simulation of conversion
+- `jszip` - mocked for creating ZIP files
+- `FileReader` - mocked for reading files
 
 ### DOM API
-- `URL.createObjectURL` - мокується для створення URL
-- `ResizeObserver` - мокується для спостереження за розміром
+- `URL.createObjectURL` - mocked for creating URL
+- `ResizeObserver` - mocked for observing size
 
-## Найкращі практики
+## Best practices
 
-1. **Використовуйте `act()` для асинхронних операцій**
-2. **Мокуйте зовнішні залежності**
-3. **Тестуйте поведінку, а не реалізацію**
-4. **Використовуйте семантичні селектори**
-5. **Групуйте пов'язані тести в `describe` блоки**
+1. **Use `act()` for asynchronous operations**
+2. **Mock external dependencies**
+3. **Test behavior, not implementation**
+4. **Use semantic selectors**
+5. **Group related tests in `describe` blocks**
 
-## Приклади тестів
+## Examples of tests
 
-### Тестування хука
+### Testing a hook
 ```typescript
-it('повинен ініціалізуватися з правильними початковими значеннями', () => {
+it('should initialize with correct default values', () => {
   const { result } = renderHook(() => useConvertor())
   
   expect(result.current.images).toEqual([])
@@ -103,18 +103,18 @@ it('повинен ініціалізуватися з правильними п
 })
 ```
 
-### Тестування компонента
+### Testing a component
 ```typescript
-it('повинен відображати правильний текст', () => {
+it('should display the correct text', () => {
   renderWithContext(<MyComponent />)
   
   expect(screen.getByText('Expected Text')).toBeInTheDocument()
 })
 ```
 
-### Тестування подій
+### Testing events
 ```typescript
-it('повинен викликати функцію при кліку', () => {
+it('should call a function when clicked', () => {
   const mockFn = vi.fn()
   renderWithContext(<MyComponent onClick={mockFn} />)
   

@@ -14,7 +14,7 @@ vi.mock('../hooks/useConvertor', () => ({
 }))
 
 describe('Converter', () => {
-  it('повинен рендерити дітей компонентів', () => {
+  it('should render child components', () => {
     render(
       <Converter>
         <div data-testid="test-child">Test Child</div>
@@ -25,7 +25,7 @@ describe('Converter', () => {
     expect(screen.getByText('Test Child')).toBeInTheDocument()
   })
 
-  it('повинен мати правильну структуру DOM', () => {
+  it('should have correct DOM structure', () => {
     render(
       <Converter>
         <div>Test</div>
@@ -37,7 +37,7 @@ describe('Converter', () => {
     expect(parentContainer).toBeInTheDocument()
   })
 
-  it('повинен рендерити без помилок', () => {
+  it('should render without errors', () => {
     expect(() => {
       render(
         <Converter>

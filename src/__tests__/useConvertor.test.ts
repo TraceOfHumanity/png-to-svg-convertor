@@ -21,7 +21,7 @@ describe('useConvertor', () => {
     vi.clearAllMocks()
   })
 
-  it('повинен ініціалізуватися з правильними початковими значеннями', () => {
+  it('should initialize with correct default values', () => {
     const { result } = renderHook(() => useConvertor())
 
     expect(result.current.images).toEqual([])
@@ -29,7 +29,7 @@ describe('useConvertor', () => {
     expect(result.current.isLoading).toBe(false)
   })
 
-  it('повинен обробляти завантаження зображень', async () => {
+  it('should handle image upload', async () => {
     const { result } = renderHook(() => useConvertor())
 
     const mockFile = createMockFile('test.png')
@@ -48,7 +48,7 @@ describe('useConvertor', () => {
     expect(result.current.images[0].name).toBe('test.png')
   })
 
-  it('повинен конвертувати зображення в SVG', async () => {
+  it('should convert images to SVG', async () => {
     const { result } = renderHook(() => useConvertor())
 
     const mockFile = new File(['test'], 'test.png', { type: 'image/png' })
@@ -80,7 +80,7 @@ describe('useConvertor', () => {
     expect(result.current.isLoading).toBe(false)
   })
 
-  it('повинен встановлювати isLoading під час конвертації', async () => {
+  it('should set isLoading during conversion', async () => {
     const { result } = renderHook(() => useConvertor())
 
     const mockFile = new File(['test'], 'test.png', { type: 'image/png' })
@@ -117,7 +117,7 @@ describe('useConvertor', () => {
     expect(result.current.isLoading).toBe(false)
   })
 
-  it('повинен завантажувати всі SVG файли', async () => {
+  it('should download all SVG files', async () => {
     const { result } = renderHook(() => useConvertor())
 
     const mockAnchor = {

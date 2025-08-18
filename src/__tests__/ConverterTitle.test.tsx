@@ -3,13 +3,13 @@ import { describe, it, expect } from 'vitest'
 import { Title } from '../components/ConverterTitle'
 
 describe('ConverterTitle', () => {
-  it('повинен відображати правильний заголовок', () => {
+  it('should display correct title', () => {
     render(<Title />)
     
     expect(screen.getByText('PNG to SVG Converter')).toBeInTheDocument()
   })
 
-  it('повинен мати правильну структуру HTML', () => {
+  it('should have correct HTML structure', () => {
     render(<Title />)
     
     const titleElement = screen.getByRole('heading', { level: 1 })
@@ -17,7 +17,7 @@ describe('ConverterTitle', () => {
     expect(titleElement).toHaveTextContent('PNG to SVG Converter')
   })
 
-  it('повинен мати правильні CSS класи', () => {
+  it('should have correct CSS classes', () => {
     render(<Title />)
     
     const titleElement = screen.getByRole('heading', { level: 1 })
